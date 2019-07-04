@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
+import { authService } from '../../services/auth'
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -14,13 +15,25 @@ export default class Login extends Component {
         }
     }
 
+    
+    handleSubmit = (e) => {
+        e.preventDefault();
+        authService.login(this.state).then(resp => {
+            alert('Logado com sucesso');
+            this.props.history.push('/videos');
+        })
+        .catch(error => {
+            alert('Erro ao logar');
+        });
+    }
+
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
 
     render = () => {
         return (
-            <Form> 
+            <Form onSubmit={this.handleSubmit}> 
                 <Row className="justify-content-center">
                     <Form.Group as={Col} xs={10} sm={8} md={6} >
                         <Form.Label>Email</Form.Label>

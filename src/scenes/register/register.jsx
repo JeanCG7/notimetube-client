@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
-import { registerService } from '../../services/register'
+import { authService } from '../../services/auth'
 
 export default class Register extends Component {
     constructor(props) {
@@ -17,7 +17,16 @@ export default class Register extends Component {
     }
 
     handleSubmit = (e) => {
-        registerService.register(this.state);
+        e.preventDefault();
+        authService.register(this.state).then(resp => {
+            if(resp.status == 201) {
+                alert(resp.data.detail);
+                this.props.history.push('/login');
+            }
+        })
+        .catch(error => {
+            alert(error);
+        });
     }
 
     handleChange = (e) => {

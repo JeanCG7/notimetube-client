@@ -20,6 +20,8 @@ export default class Login extends Component {
         e.preventDefault();
         authService.login(this.state).then(resp => {
             alert('Logado com sucesso');
+            window.localStorage.setItem('token', resp.data.userAuth.token);
+            window.localStorage.setItem('userId', resp.data.userAuth._id);
             this.props.history.push('/videos');
         })
         .catch(error => {

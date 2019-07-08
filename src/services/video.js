@@ -8,26 +8,27 @@ const url = 'http://localhost:3001/videos'
 //     }
 //   };
 
-export const upload = (videoDto) => {
-    axios.post(url, videoDto)
-        .then(resp => {
-            alert('Upload feito com sucesso');
-        })
-        .catch(error => {
-            alert('Erro ao realizar upload.');
-        })
+export const upload = (video) => {
+    const token = window.localStorage.getItem('token');
+    return axios.post(url, video, {headers: {"Authorization": token, "content-type": 'multipart/form-data'} })
 }
 
 export const get = (id) => {
-    //axios.get(url + '/id');
-    return { title: 'teste', description: 'testezera'}
+    const token = window.localStorage.getItem('token');
+    return axios.get(url + `/${id}`, {headers: {"Authorization": token}});
+}
+
+export const getAll = () => {
+    const token = window.localStorage.getItem('token');
+    return axios.get(url, {headers: {"Authorization": token}});
 }
 
 
 
 export const videoServiceFactory = () => ({
     upload,
-    get
+    get,
+    getAll
   });
   
 export const videoService = videoServiceFactory();

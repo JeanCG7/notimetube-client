@@ -71,7 +71,7 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/videos/upload" component={VideosUploadPage} />
         <Route path="/videos/:id" render={(props)=> <VideoPlayerPage id={props.match.params.id}/>} />
-        <Route path="/videos" component={() => <VideosFeedPage videos={videos}/>} />
+        <Route path="/videos" component={VideosFeedPage} />
       </Switch>
     </div>
   );

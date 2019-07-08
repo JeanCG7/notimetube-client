@@ -9,6 +9,10 @@ export default class VideoCard extends Component {
         super(props)
     }
 
+    handleClick = (e) => {
+        this.props.history.push('/videos/' + this.props.id);
+    }
+
     render = () => {
         return(
             <Card>
@@ -16,7 +20,7 @@ export default class VideoCard extends Component {
                 <Card.Body>
                     <Card.Title>{this.props.title}</Card.Title>
                     <Card.Text>{this.props.text}</Card.Text>
-                    <Button to="/videos/:id" variant="primary">Abrir vídeo</Button>
+                    <Button onClick={this.handleClick} variant="primary">Abrir vídeo</Button>
                 </Card.Body>
             </Card>
         )

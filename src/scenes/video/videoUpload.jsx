@@ -4,22 +4,43 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
+import { videoService } from '../../services/video'
+
 export default class VideoUpload extends Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
             description: '',
-            file: ''
+            file: null
         }
     }
 
     handleSubmit = (e) => {
-        debugger;
+        const data = new FormData();
+        data.append('file', this.state.file);
+        data.append('name', this.state.name);        
+        data.append('description', this.state.description);
+        data.append('uploadUser', window.localStorage.getItem('userId'));
+
+        e.preventDefault();
+        videoService.upload(data).then(resp => {
+            if(resp.status == 201) {
+                alert(resp.data.detail);
+                this.props.history.push('/videos');
+            }
+        })
+        .catch(error => {
+            alert(error);
+        });
     }
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
+    }
+
+    handleFile = (e) => {
+        this.setState({file: e.target.files[0]})
     }
 
     render = () => {
@@ -30,7 +51,7 @@ export default class VideoUpload extends Component {
                     <Row className="justify-content-lg-center">
                         <Form.Group as={Col} xs={10} sm={8} md={6}>
                             <Form.Label>Arquivo</Form.Label>
-                            <Form.Control value={this.state.file} onChange={this.handleChange} type="file" name="file" />
+                            <Form.Control onChange={this.handleFile} type="file" name="file" />
                         </Form.Group>
                     </Row>
 

@@ -16,6 +16,8 @@ class Login extends Component {
       password: '',
       error: ''
     }
+    if (authService.isAuthenticated())
+        this.props.history.push('/videos');
   }
 
   handleSubmit = async (e) => {
@@ -40,12 +42,6 @@ class Login extends Component {
         alert("Houve um problema com o login, verifique suas credenciais. T.T")
       }
     }
-    // authService.login(this.state).then(resp => {
-    //   alert('Logado com sucesso')
-    //   this.props.onClickLogin()
-    // }).catch(error => {
-    //   alert('Erro ao logar')
-    // })
   }
 
     handleChange = (e) => {
@@ -53,7 +49,7 @@ class Login extends Component {
     }
 
   render = () => {
-    return (
+    return (   
       <section id="login">
         <Form onSubmit={this.handleSubmit}>
           <Row className="justify-content-center">

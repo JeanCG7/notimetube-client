@@ -8,9 +8,11 @@ import NavItem from 'react-bootstrap/NavItem'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import { withRouter } from 'react-router'
 
-export default class NavigationBar extends Component {
+class NavigationBar extends Component {
     constructor(props) {
+        debugger;
         super(props)
     }
 
@@ -48,3 +50,4 @@ export default class NavigationBar extends Component {
         )
     }
 }
+export default withRouter(NavigationBar)

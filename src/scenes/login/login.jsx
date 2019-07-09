@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row'
 import { authService } from '../../services/auth'
 export default class Login extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             email: '',
             password: ''
@@ -17,20 +17,20 @@ export default class Login extends Component {
 
     
     handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         authService.login(this.state).then(resp => {
-            alert('Logado com sucesso');
-            window.localStorage.setItem('token', resp.data.userAuth.token);
-            window.localStorage.setItem('userId', resp.data.userAuth._id);
-            this.props.onClickLogin();
+            alert('Logado com sucesso')
+            window.localStorage.setItem('token', resp.data.userAuth.token)
+            window.localStorage.setItem('userId', resp.data.userAuth._id)
+            this.props.onClickLogin()
         })
         .catch(error => {
-            alert('Erro ao logar');
-        });
+            alert('Erro ao logar')
+        })
     }
 
     handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     render = () => {

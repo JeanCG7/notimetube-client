@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 
-import { authService } from '../../services/auth';
+import { authService } from '../../services/auth'
+import { withRouter } from 'react-router'
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       email: '',
       password: '',
@@ -18,37 +19,38 @@ export default class Login extends Component {
   }
 
   handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password } = this.state;
+    e.preventDefault()
+    const { email, password } = this.state
     if (!email || !password) {
-      this.setState({ error: "Preencha e-mail e senha para continuar!" });
-      alert("Preencha e-mail e senha para continuar!");
+      this.setState({ error: "Preencha e-mail e senha para continuar!" })
+      alert("Preencha e-mail e senha para continuar!")
     } else {
       try {
-        const response = await authService.login({ email, password });
-        window.localStorage.setItem('token', response.data.userAuth.token);
-        window.localStorage.setItem('userId', response.data.userAuth._id);
-        this.props.onClickLogin();
+        const response = await authService.login({ email, password })
+        window.localStorage.setItem('token', response.data.userAuth.token)
+        window.localStorage.setItem('userId', response.data.userAuth._id)
+        this.props.onClickLogin()
+        this.props.history.push('/videos')
       } catch (err) {
-        console.log(err);
+        console.log(err)
         this.setState({
           error:
             "Houve um problema com o login, verifique suas credenciais. T.T"
-        });
-        alert("Houve um problema com o login, verifique suas credenciais. T.T");
+        })
+        alert("Houve um problema com o login, verifique suas credenciais. T.T")
       }
     }
     // authService.login(this.state).then(resp => {
-    //   alert('Logado com sucesso');
-    //   this.props.onClickLogin();
+    //   alert('Logado com sucesso')
+    //   this.props.onClickLogin()
     // }).catch(error => {
-    //   alert('Erro ao logar');
-    // });
+    //   alert('Erro ao logar')
+    // })
   }
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
+    }
 
   render = () => {
     return (
@@ -76,6 +78,7 @@ export default class Login extends Component {
           </Row>
         </Form>
       </section>
-    );
+    )
   }
 }
+export default withRouter(Login)

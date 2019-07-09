@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import { authService } from '../services/auth'
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavItem from 'react-bootstrap/NavItem';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import NavItem from 'react-bootstrap/NavItem'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import Button from 'react-bootstrap/Button'
+import { withRouter } from 'react-router'
 
-export default class NavigationBar extends Component {
+class NavigationBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -20,6 +22,7 @@ export default class NavigationBar extends Component {
     e.preventDefault()
     authService.logout()
     this.props.onClickLogout()
+    this.props.history.push('/login')
   }
 
   onChangeSearch() {
@@ -47,10 +50,11 @@ export default class NavigationBar extends Component {
               </Nav>
             </Nav>
             <Form inline>
-              <Button to="/login" variant="outline-info" onClick={this.handleClick}>Logout</Button>
+              <Button variant="outline-info" onClick={this.handleClick}>Logout</Button>
             </Form>
           </Navbar> : null}
       </section>
     )
   }
 }
+export default withRouter(NavigationBar)

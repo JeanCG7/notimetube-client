@@ -9,26 +9,26 @@ const url = 'http://localhost:3001/videos'
 //   };
 
 export const upload = (video) => {
-    const token = window.localStorage.getItem('token');
-    return axios.post(url, video, {headers: {"Authorization": token, "content-type": 'multipart/form-data'} })
+  const token = window.localStorage.getItem('token');
+  return axios.post(url, video, { headers: { "Authorization": token, "content-type": 'multipart/form-data' } })
 }
 
 export const get = (id) => {
-    const token = window.localStorage.getItem('token');
-    return axios.get(url + `/${id}`, {headers: {"Authorization": token}});
+  const token = window.localStorage.getItem('token');
+  return axios.get(url + `/${id}`, { headers: { "Authorization": token } });
 }
 
 export const getAll = () => {
-    const token = window.localStorage.getItem('token');
-    return axios.get(url, {headers: {"Authorization": token}});
+  const token = window.localStorage.getItem('token');
+  return axios.get(url, { headers: { "Authorization": token } });
 }
 
 
 
 export const videoServiceFactory = () => ({
-    upload,
-    get,
-    getAll
-  });
-  
+  upload,
+  get,
+  getAll
+});
+
 export const videoService = videoServiceFactory();

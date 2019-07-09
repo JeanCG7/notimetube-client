@@ -4,24 +4,24 @@ import { authService } from '../services/auth'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
-    const isAuthorized = authService.isTokenValid()
-    return (
-        ({
-            ...rest.render != undefined && isAuthorized? <Route {...rest} /> :
-                (<Route {...rest}
-                    render={props => (
-                        isAuthorized ? (
-                            <Component {...props} />
-                        ) : (
-                                <Redirect to={{
-                                    pathname: '/login',
-                                    state: { from: props.location }
-                                }} />
-                            )
-                    )} />)
-        }
-        )
+  const isAuthorized = authService.isTokenValid()
+  return (
+    ({
+      ...rest.render != undefined && isAuthorized ? <Route {...rest} /> :
+        (<Route {...rest}
+          render={props => (
+            isAuthorized ? (
+              <Component {...props} />
+            ) : (
+                <Redirect to={{
+                  pathname: '/login',
+                  state: { from: props.location }
+                }} />
+              )
+          )} />)
+    }
     )
+  )
 }
 
 export default PrivateRoute

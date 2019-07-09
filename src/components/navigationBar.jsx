@@ -12,12 +12,23 @@ import Button from 'react-bootstrap/Button'
 export default class NavigationBar extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      search: ''
+    };
   }
 
   handleClick = (e) => {
     e.preventDefault()
     authService.logout()
     this.props.onClickLogout()
+  }
+
+  onChangeSearch() {
+    this.props.changeSearch(this.state.search);
+  }
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render = () => {
@@ -36,8 +47,8 @@ export default class NavigationBar extends Component {
                 </NavItem>
               </Nav>
               <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-info">Search</Button>
+                <FormControl value={this.state.search} onChange={this.handleChange} type="text" name="search" placeholder="Search" className="mr-sm-2" />
+                <Button onClick={this.onChangeSearch.bind(this)} variant="outline-info">Search</Button>
               </Form>
             </Nav>
             <Form inline>

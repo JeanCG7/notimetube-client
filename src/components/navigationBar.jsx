@@ -11,43 +11,54 @@ import Button from 'react-bootstrap/Button'
 import { withRouter } from 'react-router'
 
 class NavigationBar extends Component {
-    constructor(props) {
-        debugger;
-        super(props)
-    }
+  constructor(props) {
+    super(props)
+    this.state = {
+      search: ''
+    };
+  }
 
-    handleClick = (e) => {
-        e.preventDefault()
-        authService.logout()
-        this.props.onClickLogout()
-    }
+  handleClick = (e) => {
+    e.preventDefault()
+    authService.logout()
+    this.props.onClickLogout()
+    this.props.history.push('/login')
+  }
 
-    render = () => {
-        return (
-            <section id="navigationBar">
-                {this.props.isTokenValid ? 
-                <Navbar bg="dark" variant="dark" className="justify-content-between">
-                    <Nav inline="true" className="align-items-center">
-                        <Navbar.Brand>NoTimeTube</Navbar.Brand>
-                        <Nav>
-                            <NavItem className="mr-3">
-                                <Link to="/videos">Vídeos</Link>
-                            </NavItem>
-                            <NavItem className="mr-3">
-                                <Link to="/videos/upload">Upload</Link>
-                            </NavItem>
-                        </Nav>
-                        <Form inline>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button variant="outline-info">Search</Button>
-                        </Form>
-                    </Nav>
-                    <Form inline>
-                        <Button to="/login" variant="outline-info" onClick={this.handleClick}>Logout</Button>
-                    </Form>
-                </Navbar> : null }
-            </section>
-        )
-    }
+  onChangeSearch() {
+    this.props.changeSearch(this.state.search);
+  }
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  render = () => {
+    return (
+      <section id="navigationBar">
+        {this.props.isTokenValid ?
+          <Navbar bg="dark" variant="dark" className="justify-content-between">
+            <Nav inline="true" className="align-items-center">
+              <Navbar.Brand>NoTimeTube</Navbar.Brand>
+              <Nav>
+                <NavItem className="mr-3">
+                  <Link to="/videos">Vídeos</Link>
+                </NavItem>
+                <NavItem className="mr-3">
+                  <Link to="/videos/upload">Upload</Link>
+                </NavItem>
+              </Nav>
+              <Form inline>
+                <FormControl value={this.state.search} onChange={this.handleChange} type="text" name="search" placeholder="Search" className="mr-sm-2" />
+                <Button onClick={this.onChangeSearch.bind(this)} variant="outline-info">Search</Button>
+              </Form>
+            </Nav>
+            <Form inline>
+              <Button variant="outline-info" onClick={this.handleClick}>Logout</Button>
+            </Form>
+          </Navbar> : null}
+      </section>
+    )
+  }
 }
 export default withRouter(NavigationBar)

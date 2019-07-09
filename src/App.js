@@ -18,26 +18,33 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isTokenValid: authService.isTokenValid()
+      isTokenValid: authService.isTokenValid(),
+      search: ''
     }
   }
 
   logout = (e) => {
-    this.setState({isTokenValid: false});
+    this.setState({ isTokenValid: false });
   }
 
   login = (e) => {
-    this.setState({isTokenValid: true});
+    this.setState({ isTokenValid: true });
   }
-  
+
+  onChangeSearchInput(search) {
+    this.setState({
+      search: search
+    });
+  }
+
   render = () => {
     return (
       <div>
-        <NavigationBar onClickLogout={this.logout} isTokenValid={this.state.isTokenValid}/>
+        <NavigationBar onClickLogout={this.logout} isTokenValid={this.state.isTokenValid} changeSearch={this.onChangeSearchInput.bind(this)} />
         <Switch>
           <PrivateRoute exact path="/" component={VideosFeedPage} />
           <Route path="/register" component={RegisterPage} />
-          <Route path="/login" render={(props) => <LoginPage onClickLogin={this.login}/> } />
+          <Route path="/login" render={(props) => <LoginPage onClickLogin={this.login} />} />
           <PrivateRoute path="/videos/upload" component={VideosUploadPage} />
           <PrivateRoute path="/videos/:id" render={(props) => <VideoPlayerPage id={props.match.params.id} />} />
           <PrivateRoute path="/videos" component={VideosFeedPage} />

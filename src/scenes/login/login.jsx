@@ -22,7 +22,7 @@ export default class Login extends Component {
             alert('Logado com sucesso');
             window.localStorage.setItem('token', resp.data.userAuth.token);
             window.localStorage.setItem('userId', resp.data.userAuth._id);
-            this.props.history.push('/videos');
+            this.props.onClickLogin();
         })
         .catch(error => {
             alert('Erro ao logar');
@@ -53,7 +53,7 @@ export default class Login extends Component {
                 <Row className="justify-content-center">
                     <Form.Group as={Col} xs={10} sm={8} md={6}>
                         <p>Ainda não tem uma conta? <Link to="/register">Registrar</Link></p>
-                        <Button variant="primary" type="submit">
+                        <Button to="/videos" variant="primary" type="submit">
                         Login
                         </Button>             
                     </Form.Group>

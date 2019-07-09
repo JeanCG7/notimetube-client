@@ -16,7 +16,7 @@ export default class VideoCard extends Component {
     render = () => {
         return(
             <Card>
-                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Img variant="top" src={require("../imgs/150x150.png")} />
                 <Card.Body>
                     <Card.Title>{this.props.title}</Card.Title>
                     <Card.Text>{this.props.text}</Card.Text>

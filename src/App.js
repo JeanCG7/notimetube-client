@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import './App.css';
@@ -11,22 +11,38 @@ import LoginPage from './scenes/login/login'
 import VideosFeedPage from './scenes/video/videoFeed'
 import VideosUploadPage from './scenes/video/videoUpload'
 import VideoPlayerPage from './scenes/video/videoPlayer'
+import { authService } from './services/auth';
 require('dotenv').config()
 
-function App() {
-  return (
-    <div>
-      <NavigationBar />
-      <Switch>
-        <PrivateRoute exact path="/" component={VideosFeedPage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/login" component={LoginPage} />
-        <PrivateRoute path="/videos/upload" component={VideosUploadPage} />
-        <PrivateRoute path="/videos/:id" render={(props)=> <VideoPlayerPage id={props.match.params.id}/>} />
-        <PrivateRoute path="/videos" component={VideosFeedPage} />
-      </Switch>
-    </div>
-  );
-}
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isTokenValid: authService.isTokenValid()
+    }
+  }
 
-export default App;
+  logout = (e) => {
+    this.setState({isTokenValid: false});
+  }
+
+  login = (e) => {
+    this.setState({isTokenValid: true});
+  }
+  
+  render = () => {
+    return (
+      <div>
+        <NavigationBar onClickLogout={this.logout} isTokenValid={this.state.isTokenValid}/>
+        <Switch>
+          <PrivateRoute exact path="/" component={VideosFeedPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/login" render={(props) => <LoginPage onClickLogin={this.login}/> } />
+          <PrivateRoute path="/videos/upload" component={VideosUploadPage} />
+          <PrivateRoute path="/videos/:id" render={(props) => <VideoPlayerPage id={props.match.params.id} />} />
+          <PrivateRoute path="/videos" component={VideosFeedPage} />
+        </Switch>
+      </div>
+    );
+  }
+}

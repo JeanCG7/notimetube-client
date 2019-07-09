@@ -11,6 +11,11 @@ export const login = (user) => {
     return axios.post(url + '/login', user)
 }
 
+export const logout = () => {
+    window.localStorage.removeItem('userId')
+    window.localStorage.removeItem('token')
+}
+
 export const isTokenValid = () => {
     const token = window.localStorage.getItem('token')
     if (!token) 
@@ -32,7 +37,8 @@ export const isTokenValid = () => {
 export const authServiceFactory = () => ({
     register,
     login,
-    isTokenValid
+    isTokenValid,
+    logout
   })
   
 export const authService = authServiceFactory()

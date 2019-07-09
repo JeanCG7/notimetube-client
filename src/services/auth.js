@@ -1,28 +1,38 @@
-import axios from 'axios';
+import axios from 'axios'
+import jwt  from 'jsonwebtoken'
 
 const url = 'http://localhost:3001'
 
 export const register = (user) => {
-    return axios.post(url + '/register', user);
+    return axios.post(url + '/register', user)
 }
 
 export const login = (user) => {
-    return axios.post(url + '/login', user);
+    return axios.post(url + '/login', user)
 }
 
-export const verifyIfExists = (email) => {
-    axios.get(`${url}/:${email}`)
-        .then(resp => {
-            if(resp != null)
-            return false
-        });
-    return true;
+export const isTokenValid = () => {
+    const token = window.localStorage.getItem('token')
+    if (!token) 
+        return false
+
+    const decoded = jwt.verify(token, process.env.REACT_APP_SECRET)
+  
+    const now = parseInt(new Date().getTime() / 1000, 10)
+    if (decoded.exp <= now) 
+        return false
+
+    const userId = window.localStorage.getItem('userId')
+    if (userId != decoded.id)
+        return false
+    
+    return true
 }
 
 export const authServiceFactory = () => ({
     register,
-    verifyIfExists, 
-    login
-  });
+    login,
+    isTokenValid
+  })
   
-export const authService = authServiceFactory();
+export const authService = authServiceFactory()

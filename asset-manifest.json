@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/notimetube-client/static/css/main.86a0c718.chunk.css",
+    "main.js": "/notimetube-client/static/js/main.7e82dcee.chunk.js",
+    "main.js.map": "/notimetube-client/static/js/main.7e82dcee.chunk.js.map",
+    "runtime~main.js": "/notimetube-client/static/js/runtime~main.f21f5c17.js",
+    "runtime~main.js.map": "/notimetube-client/static/js/runtime~main.f21f5c17.js.map",
+    "static/css/2.510409cd.chunk.css": "/notimetube-client/static/css/2.510409cd.chunk.css",
+    "static/js/2.0e0e2ee3.chunk.js": "/notimetube-client/static/js/2.0e0e2ee3.chunk.js",
+    "static/js/2.0e0e2ee3.chunk.js.map": "/notimetube-client/static/js/2.0e0e2ee3.chunk.js.map",
+    "index.html": "/notimetube-client/index.html",
+    "precache-manifest.1cb003f28fce5df3a3dffca502c14496.js": "/notimetube-client/precache-manifest.1cb003f28fce5df3a3dffca502c14496.js",
+    "service-worker.js": "/notimetube-client/service-worker.js",
+    "static/css/2.510409cd.chunk.css.map": "/notimetube-client/static/css/2.510409cd.chunk.css.map",
+    "static/css/main.86a0c718.chunk.css.map": "/notimetube-client/static/css/main.86a0c718.chunk.css.map"
+  }
+}

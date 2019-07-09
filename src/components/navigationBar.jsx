@@ -48,10 +48,6 @@ class NavigationBar extends Component {
                   <Link to="/videos/upload">Upload</Link>
                 </NavItem>
               </Nav>
-              <Form inline>
-                <FormControl value={this.state.search} onChange={this.handleChange} type="text" name="search" placeholder="Search" className="mr-sm-2" />
-                <Button onClick={this.onChangeSearch.bind(this)} variant="outline-info">Search</Button>
-              </Form>
             </Nav>
             <Form inline>
               <Button variant="outline-info" onClick={this.handleClick}>Logout</Button>

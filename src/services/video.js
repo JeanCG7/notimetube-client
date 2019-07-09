@@ -8,10 +8,10 @@ export const get = (id) => {
   return api.get('/videos' + `/${id}`);
 }
 
-export const getAll = () => {
-  return api.get('/videos');
+export const getAll = async (search) => {
+  const url = search === '' ? '/videos' : `/videos?search=${search}`;
+  return api.get(url);
 }
-
 
 
 export const videoServiceFactory = () => ({

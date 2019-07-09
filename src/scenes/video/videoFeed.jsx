@@ -48,7 +48,7 @@ export default class VideoFeed extends Component {
   render = () => {
     return (
       <section id="videoFeed">
-        <Form>
+        <Form inline>
           <FormControl value={this.state.search} onChange={this.handleChange} type="text" name="search" placeholder="Search" className="mr-sm-2" />
           <Button onClick={this.onChangeSearch} variant="outline-info">Search</Button>
         </Form>

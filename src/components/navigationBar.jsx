@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import { authService } from '../services/auth'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import NavItem from 'react-bootstrap/NavItem'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavItem from 'react-bootstrap/NavItem';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 export default class NavigationBar extends Component {
   constructor(props) {
@@ -46,10 +45,6 @@ export default class NavigationBar extends Component {
                   <Link to="/videos/upload">Upload</Link>
                 </NavItem>
               </Nav>
-              <Form inline>
-                <FormControl value={this.state.search} onChange={this.handleChange} type="text" name="search" placeholder="Search" className="mr-sm-2" />
-                <Button onClick={this.onChangeSearch.bind(this)} variant="outline-info">Search</Button>
-              </Form>
             </Nav>
             <Form inline>
               <Button to="/login" variant="outline-info" onClick={this.handleClick}>Logout</Button>
